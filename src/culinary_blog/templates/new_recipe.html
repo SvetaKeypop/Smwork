@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="page-title">Новый рецепт</h1>
+
+<form class="new-recipe" method="post" action="/recipes" enctype="multipart/form-data">
+    <div class="new-recipe__grid">
+        <section class="card-form">
+            <h2 class="block-title">Основное</h2>
+            <label>Название
+                <input type="text" name="title" placeholder="например: Паста с томатами" required>
+            </label>
+            <label>Описание
+                <textarea name="description" rows="4" placeholder="пара предложений о рецепте..."></textarea>
+            </label>
+        </section>
+
+        <section class="card-form">
+            <h2 class="block-title">Фото</h2>
+            <label class="upload">
+                <input type="file" name="image" accept="image/png,image/jpeg,image/webp">
+                <span class="upload__icon">⤓</span>
+                <span class="upload__text">Загрузите фото блюда</span>
+            </label>
+        </section>
+    </div>
+
+    <section class="card-form">
+        <h2 class="block-title">Ингредиенты</h2>
+        <div id="ingredients">
+            <div class="ingredient-row">
+                <input type="text" name="ingredient_name" placeholder="название...">
+                <input type="text" name="ingredient_amount" placeholder="кол-во">
+                <button type="button" class="btn-remove" aria-label="Удалить">×</button>
+            </div>
+        </div>
+        <button type="button" class="btn-add" id="add-ingredient">+ Добавить ингредиент</button>
+    </section>
+
+    <section class="card-form">
+        <h2 class="block-title">Шаги</h2>
+        <div id="steps">
+            <div class="step-row">
+                <span class="step__num">1</span>
+                <textarea name="step_text" rows="2" placeholder="описание шага..."></textarea>
+                <button type="button" class="btn-remove" aria-label="Удалить">×</button>
+            </div>
+        </div>
+        <button type="button" class="btn-add" id="add-step">+ Добавить шаг</button>
+    </section>
+
+    <div class="form-actions">
+        <a href="/" class="btn btn--ghost">Отмена</a>
+        <button type="submit" class="btn btn--primary">Опубликовать</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/new_recipe.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="recipe">
+    <div class="recipe__top">
+        <div class="recipe__cover">
+            {% if recipe.image_path %}
+                <img src="{{ recipe.image_path }}" alt="{{ recipe.title }}">
+            {% else %}
+                <div class="recipe__placeholder"></div>
+            {% endif %}
+        </div>
+        <div class="recipe__head">
+            <h1 class="recipe__title">{{ recipe.title }}</h1>
+            <p class="recipe__author">
+                <span class="avatar"></span>{{ recipe.author.name }}
+            </p>
+            {% if recipe.description %}
+                <p class="recipe__desc">{{ recipe.description }}</p>
+            {% endif %}
+            <div class="recipe__actions">
+                <button class="btn btn--primary js-fav {% if in_favorites %}is-on{% endif %}"
+                        data-recipe-id="{{ recipe.id }}"
+                        {% if not user %}data-needs-auth="1"{% endif %}>
+                    ♥ <span class="js-fav-text">{% if in_favorites %}В избранном{% else %}В избранное{% endif %}</span>
+                </button>
+                <button class="btn btn--ghost js-like {% if liked %}is-on{% endif %}"
+                        data-recipe-id="{{ recipe.id }}"
+                        {% if not user %}data-needs-auth="1"{% endif %}>
+                    👍 <span class="js-like-count">{{ recipe.likes_count }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="recipe__body">
+        <aside class="ingredients">
+            <h2 class="block-title">Ингредиенты</h2>
+            <ul class="ingredients__list">
+                {% for ing in recipe.ingredients %}
+                    <li>
+                        <label><input type="checkbox"> <span>{{ ing.name }}</span></label>
+                        <span class="ingredients__amount">{{ ing.amount }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <div class="steps">
+            <h2 class="block-title">Приготовление</h2>
+            <ol class="steps__list">
+                {% for step in recipe.steps %}
+                    <li><span class="step__num">{{ loop.index }}</span><p>{{ step.text }}</p></li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/recipes.js') }}"></script>
+{% endblock %}

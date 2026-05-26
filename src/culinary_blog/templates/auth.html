@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth">
+    {% if error == "email_taken" %}
+        <p class="alert">Пользователь с таким email уже зарегистрирован.</p>
+    {% elif error == "invalid_credentials" %}
+        <p class="alert">Неверный email или пароль.</p>
+    {% endif %}
+
+    <div class="auth__cards">
+        <form class="card-form" method="post" action="/login">
+            <h2 class="block-title">Войти</h2>
+            <label>E-mail
+                <input type="email" name="email" placeholder="your@email.com" required>
+            </label>
+            <label>Пароль
+                <input type="password" name="password" placeholder="••••••••" required>
+            </label>
+            <button type="submit" class="btn btn--primary btn--wide">Войти</button>
+        </form>
+
+        <form class="card-form" id="register" method="post" action="/register">
+            <h2 class="block-title">Регистрация</h2>
+            <label>Имя
+                <input type="text" name="name" placeholder="Как к вам обращаться" required>
+            </label>
+            <label>E-mail
+                <input type="email" name="email" placeholder="your@email.com" required>
+            </label>
+            <label>Пароль
+                <input type="password" name="password" placeholder="не менее 8 символов" minlength="8" required>
+            </label>
+            <button type="submit" class="btn btn--primary btn--wide">Создать аккаунт</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

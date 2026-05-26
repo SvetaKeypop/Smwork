@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="page-title">Админ-панель</h1>
+
+<section class="card-form">
+    <h2 class="block-title">Все рецепты ({{ recipes|length }})</h2>
+    <table class="admin-table">
+        <thead><tr><th>ID</th><th>Название</th><th>Автор</th><th></th></tr></thead>
+        <tbody>
+        {% for r in recipes %}
+            <tr>
+                <td>{{ r.id }}</td>
+                <td><a href="/recipe/{{ r.id }}">{{ r.title }}</a></td>
+                <td>{{ r.author.name }}</td>
+                <td>
+                    <form method="post" action="/admin/recipes/{{ r.id }}/delete"
+                          onsubmit="return confirm('Удалить рецепт?');">
+                        <button class="btn btn--ghost btn--danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section class="card-form">
+    <h2 class="block-title">Пользователи ({{ users|length }})</h2>
+    <table class="admin-table">
+        <thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Роль</th><th>Статус</th><th></th></tr></thead>
+        <tbody>
+        {% for u in users %}
+            <tr>
+                <td>{{ u.id }}</td>
+                <td>{{ u.name }}</td>
+                <td>{{ u.email }}</td>
+                <td>{% if u.is_admin %}админ{% else %}пользователь{% endif %}</td>
+                <td>{% if u.is_blocked %}заблокирован{% else %}активен{% endif %}</td>
+                <td>
+                    {% if not u.is_admin %}
+                        <form method="post" action="/admin/users/{{ u.id }}/block">
+                            <button class="btn btn--ghost">
+                                {% if u.is_blocked %}Разблокировать{% else %}Заблокировать{% endif %}
+                            </button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="panel">
+    <div class="panel__header">
+        <h1 class="panel__title">{{ heading or "Рецепты" }}</h1>
+        <input type="search" class="search" placeholder="🔍 поиск рецепта..." id="recipe-search">
+    </div>
+
+    {% if recipes %}
+        <div class="grid">
+            {% for r in recipes %}
+                {% include "_recipe_card.html" %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty">Рецептов пока нет. {% if user %}<a href="/new">Опубликуйте первый</a>.{% endif %}</p>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/recipes.js') }}"></script>
+<script src="{{ url_for('static', path='/js/search.js') }}"></script>
+{% endblock %}

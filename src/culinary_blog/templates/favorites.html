@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="panel">
+    <div class="panel__header">
+        <h1 class="panel__title">Избранное</h1>
+    </div>
+
+    {% if recipes %}
+        <div class="grid">
+            {% for r in recipes %}
+                {% include "_recipe_card.html" %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty">В избранном пока пусто. <a href="/">Перейти в каталог</a>.</p>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/recipes.js') }}"></script>
+{% endblock %}

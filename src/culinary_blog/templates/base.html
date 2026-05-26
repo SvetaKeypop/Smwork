@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or "Кулинарный блог" }} — Кулинарный блог</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+</head>
+<body>
+<header class="topbar">
+    <div class="container topbar__inner">
+        <a class="logo" href="/">
+            <span class="logo__dot"></span>
+            <span class="logo__text">Кулинарный блог</span>
+        </a>
+        <nav class="nav">
+            <a href="/" class="nav__link {% if request.url.path == '/' %}is-active{% endif %}">Главная</a>
+            <a href="/favorites" class="nav__link {% if request.url.path == '/favorites' %}is-active{% endif %}">Избранное</a>
+            <a href="/my" class="nav__link {% if request.url.path == '/my' %}is-active{% endif %}">Мои рецепты</a>
+            {% if user %}
+                <a href="/new" class="btn btn--ghost">+ Новый рецепт</a>
+                {% if user.is_admin %}<a href="/admin" class="nav__link">Админ</a>{% endif %}
+                <form method="post" action="/logout" class="inline-form">
+                    <button type="submit" class="btn btn--ghost">Выйти ({{ user.name }})</button>
+                </form>
+            {% else %}
+                <a href="/auth" class="btn btn--ghost">Войти</a>
+                <a href="/auth#register" class="btn btn--primary">Регистрация</a>
+            {% endif %}
+        </nav>
+    </div>
+    <div class="topbar__divider"></div>
+</header>
+
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>
