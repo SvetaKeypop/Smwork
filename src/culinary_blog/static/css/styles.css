@@ -345,6 +345,16 @@ a:hover { color: var(--accent-hover); }
 }
 .admin-table th { color: var(--muted); font-weight: 500; font-size: 13px; }
 
+.rename-form { display: flex; gap: 6px; align-items: center; }
+.rename-form input {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: var(--text); font: inherit;
+    min-width: 160px;
+}
+
 /* Адаптив */
 @media (max-width: 800px) {
     .recipe__top, .recipe__body, .new-recipe__grid, .auth__cards {

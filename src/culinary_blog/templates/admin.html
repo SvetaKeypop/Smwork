@@ -33,7 +33,12 @@
         {% for u in users %}
             <tr>
                 <td>{{ u.id }}</td>
-                <td>{{ u.name }}</td>
+                <td>
+                    <form method="post" action="/admin/users/{{ u.id }}/rename" class="rename-form">
+                        <input type="text" name="name" value="{{ u.name }}" required maxlength="80">
+                        <button class="btn btn--ghost">Сохранить</button>
+                    </form>
+                </td>
                 <td>{{ u.email }}</td>
                 <td>{% if u.is_admin %}админ{% else %}пользователь{% endif %}</td>
                 <td>{% if u.is_blocked %}заблокирован{% else %}активен{% endif %}</td>
