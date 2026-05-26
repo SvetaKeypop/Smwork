@@ -50,7 +50,8 @@ pip install -r requirements.txt
 cp .env.example .env           # подправь DATABASE_URL под свой Postgres
 
 # поднять PostgreSQL отдельно (либо через compose, см. ниже)
-python -m culinary_blog        # откроется на http://localhost:8000
+uvicorn culinary_blog.main:app --app-dir src --host 0.0.0.0 --port 8000
+# откроется на http://localhost:8000
 ```
 
 При первом запуске:
@@ -63,10 +64,20 @@ python -m culinary_blog        # откроется на http://localhost:8000
 Поднимет PostgreSQL и приложение одной командой:
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 Приложение будет доступно на `http://localhost:8000`.
+
+> Если путь к проекту содержит кириллицу/пробелы, Docker Compose может ругаться
+> `project name must not be empty`. В этом случае передайте имя явно:
+> `docker compose -p culinary_blog up --build`.
+
+Остановить и удалить контейнеры:
+
+```bash
+docker compose -p culinary_blog down
+```
 
 ## Сборка пакета
 

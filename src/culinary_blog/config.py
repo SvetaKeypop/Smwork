@@ -14,7 +14,7 @@ PACKAGE_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = PACKAGE_DIR.parent.parent
 
 def _normalize_db_url(url: str) -> str:
-    """Render/Heroku отдают postgres://..., SQLAlchemy ждёт явный драйвер."""
+    """Приводит URL к виду postgresql+psycopg://, чтобы SQLAlchemy знал драйвер."""
     if url.startswith("postgres://"):
         return "postgresql+psycopg://" + url[len("postgres://") :]
     if url.startswith("postgresql://"):
