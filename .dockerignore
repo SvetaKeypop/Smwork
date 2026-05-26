@@ -1,0 +1,33 @@
+.git
+.gitignore
+.gitattributes
+
+.venv
+venv
+env
+__pycache__
+*.py[cod]
+*.egg-info
+
+# документация и отчёты — не нужны рантайму
+docs
+sphinx_docs
+ОТЧЁТ.md
+
+# тесты не запускаются в образе
+tests
+
+# локальные/сборочные артефакты
+.env
+*.db
+*.sqlite*
+media/uploads/*
+
+# IDE и системное
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+
+# compose нужен только локально/на dev-машине
+docker-compose.yml
