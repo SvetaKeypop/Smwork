@@ -13,9 +13,17 @@ PACKAGE_DIR = Path(__file__).resolve().parent
 # Корень репозитория (на уровень выше src/).
 PROJECT_ROOT = PACKAGE_DIR.parent.parent
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql+psycopg://blog:blog@localhost:5432/culinary_blog",
+def _normalize_db_url(url: str) -> str:
+    """Render/Heroku отдают postgres://..., SQLAlchemy ждёт явный драйвер."""
+    if url.startswith("postgres://"):
+        return "postgresql+psycopg://" + url[len("postgres://") :]
+    if url.startswith("postgresql://"):
+        return "postgresql+psycopg://" + url[len("postgresql://") :]
+    return url
+
+
+DATABASE_URL = _normalize_db_url(
+    os.getenv("DATABASE_URL", "postgresql+psycopg://blog:blog@localhost:5432/culinary_blog")
 )
 
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-change-me")
