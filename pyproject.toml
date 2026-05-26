@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "culinary-blog"
+version = "0.1.0"
+description = "Веб-приложение «Кулинарный блог» — каталог рецептов с регистрацией, лайками и избранным."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Лапин Матвей Максимович" },
+    { name = "Василенко Фёдор" },
+]
+license = { text = "MIT" }
+dependencies = [
+    "fastapi==0.115.0",
+    "uvicorn[standard]==0.30.6",
+    "jinja2==3.1.4",
+    "python-multipart==0.0.9",
+    "sqlalchemy==2.0.35",
+    "psycopg[binary]==3.2.3",
+    "passlib==1.7.4",
+    "bcrypt==4.0.1",
+    "itsdangerous==2.2.0",
+    "python-dotenv==1.0.1",
+]
+
+[project.optional-dependencies]
+docs = ["sphinx==8.0.2"]
+
+[project.scripts]
+culinary-blog = "culinary_blog.main:run"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+culinary_blog = ["templates/*.html", "static/css/*.css", "static/js/*.js", "static/img/*"]
