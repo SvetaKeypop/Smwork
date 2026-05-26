@@ -1,0 +1,356 @@
+/* Палитра под макет: кремовый фон + оранжевый акцент */
+:root {
+    --bg: #FAF3E0;
+    --panel: #FFF6E3;
+    --card: #FFFAEC;
+    --border: #E8D8B4;
+    --text: #2B2218;
+    --muted: #8A7A60;
+    --accent: #E76F1A;
+    --accent-hover: #C95A0F;
+    --danger: #B7372F;
+    --radius: 18px;
+    --shadow: 0 1px 0 rgba(43, 34, 24, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    font-size: 15px;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* Шапка */
+.topbar { padding: 18px 0 0; }
+.topbar__inner { display: flex; align-items: center; justify-content: space-between; }
+.topbar__divider {
+    margin-top: 14px;
+    border-bottom: 1px dashed var(--border);
+}
+.logo { display: inline-flex; align-items: center; gap: 10px; color: var(--text); }
+.logo__dot {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #F2C28A; border: 1.5px solid #C58A4F;
+}
+.logo__text {
+    font-family: 'Caveat', cursive; font-size: 26px; font-weight: 700;
+}
+
+.nav { display: flex; align-items: center; gap: 18px; }
+.nav__link {
+    color: var(--text); font-weight: 500; padding: 6px 2px;
+    border-bottom: 2px solid transparent;
+}
+.nav__link.is-active { border-bottom-color: var(--accent); color: var(--accent); }
+
+.inline-form { display: inline; margin: 0; }
+
+/* Кнопки */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1.5px solid var(--text);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font: inherit; font-weight: 500;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn--primary {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+}
+.btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+.btn--ghost { background: transparent; }
+.btn--ghost:hover { background: rgba(231, 111, 26, 0.08); border-color: var(--accent); color: var(--accent); }
+.btn--wide { width: 100%; }
+.btn--danger { color: var(--danger); border-color: var(--danger); }
+.btn--danger:hover { background: var(--danger); color: #fff; }
+
+/* Панели */
+.panel {
+    margin-top: 26px;
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 26px;
+}
+.panel__header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px; gap: 16px;
+}
+.panel__title {
+    font-family: 'Caveat', cursive; font-weight: 700; font-size: 36px;
+    margin: 0;
+}
+.search {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 10px 16px;
+    min-width: 260px;
+    font: inherit;
+    color: var(--text);
+}
+.search::placeholder { color: var(--muted); }
+
+.page-title {
+    font-family: 'Caveat', cursive; font-weight: 700; font-size: 36px;
+    margin: 28px 0 18px;
+}
+
+/* Сетка карточек */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(43,34,24,0.08); }
+
+.card__cover {
+    display: block; position: relative;
+    height: 170px;
+    background:
+        repeating-linear-gradient(45deg, #E5D4AC 0 8px, #DFCAA1 8px 16px);
+}
+.card__cover img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.card__placeholder { width: 100%; height: 100%; }
+
+.card__fav {
+    position: absolute; top: 12px; right: 12px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text);
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+}
+.card__fav.is-on { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.card__body { padding: 14px 16px 16px; }
+.card__title { margin: 0 0 4px; font-size: 16px; }
+.card__title a { color: var(--text); }
+.card__title a:hover { color: var(--accent); }
+.card__author { margin: 0; color: var(--muted); font-size: 13px; }
+
+.empty { color: var(--muted); padding: 24px 0; }
+
+/* Страница рецепта */
+.recipe { margin-top: 26px; }
+.recipe__top {
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+}
+.recipe__cover {
+    height: 320px;
+    border-radius: 14px; overflow: hidden;
+    background:
+        repeating-linear-gradient(45deg, #E5D4AC 0 8px, #DFCAA1 8px 16px);
+}
+.recipe__cover img { width: 100%; height: 100%; object-fit: cover; }
+.recipe__placeholder { width: 100%; height: 100%; }
+
+.recipe__title {
+    font-family: 'Caveat', cursive; font-weight: 700;
+    font-size: 38px; margin: 0 0 12px;
+}
+.recipe__author {
+    color: var(--muted); display: flex; align-items: center; gap: 8px;
+    margin: 0 0 14px;
+}
+.avatar {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #F2C28A; border: 1.5px solid #C58A4F;
+}
+.recipe__desc { color: var(--text); margin: 0 0 16px; }
+.recipe__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.js-fav.is-on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.js-like.is-on { color: var(--accent); border-color: var(--accent); }
+
+.recipe__body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 22px;
+    margin-top: 22px;
+}
+
+.block-title {
+    font-family: 'Caveat', cursive; font-weight: 700;
+    font-size: 24px; margin: 0 0 14px;
+}
+
+.ingredients {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+}
+.ingredients__list { list-style: none; padding: 0; margin: 0; }
+.ingredients__list li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px dashed var(--border);
+}
+.ingredients__list li:last-child { border-bottom: none; }
+.ingredients__amount { color: var(--muted); font-style: italic; font-size: 13px; }
+
+.steps {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+}
+.steps__list { list-style: none; counter-reset: step; padding: 0; margin: 0; }
+.steps__list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 10px 0; border-bottom: 1px dashed var(--border);
+}
+.steps__list li:last-child { border-bottom: none; }
+.step__num {
+    flex: none;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600;
+    font-style: italic;
+}
+.steps__list p { margin: 0; line-height: 1.55; }
+
+/* Авторизация */
+.auth { margin-top: 28px; }
+.auth__cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.alert {
+    background: #FBE6DC; border: 1px solid #E9B299; color: #8A2A14;
+    padding: 12px 16px; border-radius: 12px; margin-bottom: 16px;
+}
+
+.card-form {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+}
+.card-form label {
+    display: block; margin-bottom: 14px;
+    font-size: 13px; color: var(--muted);
+}
+.card-form input[type=email],
+.card-form input[type=password],
+.card-form input[type=text],
+.card-form textarea {
+    display: block; width: 100%;
+    margin-top: 6px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: var(--text); font: inherit;
+}
+.card-form textarea { resize: vertical; min-height: 80px; }
+.card-form input:focus,
+.card-form textarea:focus { outline: 2px solid rgba(231,111,26,0.35); }
+
+/* Форма публикации */
+.new-recipe__grid {
+    display: grid; grid-template-columns: 2fr 1fr;
+    gap: 20px; margin-bottom: 20px;
+}
+.new-recipe .card-form { margin-bottom: 20px; }
+
+.upload {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 2px dashed var(--border);
+    border-radius: 14px;
+    padding: 32px 16px;
+    cursor: pointer;
+    text-align: center;
+}
+.upload input[type=file] { display: none; }
+.upload__icon {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1.5px solid var(--accent); color: var(--accent);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 10px;
+}
+.upload__text { color: var(--muted); }
+
+.ingredient-row, .step-row {
+    display: grid;
+    grid-template-columns: 1fr 130px 40px;
+    gap: 8px; margin-bottom: 10px;
+    align-items: center;
+}
+.step-row { grid-template-columns: 32px 1fr 40px; align-items: flex-start; }
+.step-row textarea { margin-top: 0; }
+.step-row .step__num { margin-top: 4px; }
+.ingredient-row input, .step-row textarea {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font: inherit; color: var(--text);
+}
+.btn-remove {
+    width: 32px; height: 32px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--card);
+    cursor: pointer; color: var(--muted);
+}
+.btn-remove:hover { color: var(--danger); border-color: var(--danger); }
+.btn-add {
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 10px;
+    padding: 8px 14px;
+    cursor: pointer; font: inherit;
+}
+.btn-add:hover { background: var(--accent-hover); }
+
+.form-actions {
+    display: flex; justify-content: flex-end; gap: 12px;
+    padding-top: 16px; border-top: 1px dashed var(--border);
+}
+
+/* Админ */
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th, .admin-table td {
+    padding: 10px 8px; text-align: left;
+    border-bottom: 1px dashed var(--border);
+}
+.admin-table th { color: var(--muted); font-weight: 500; font-size: 13px; }
+
+/* Адаптив */
+@media (max-width: 800px) {
+    .recipe__top, .recipe__body, .new-recipe__grid, .auth__cards {
+        grid-template-columns: 1fr;
+    }
+    .nav { gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .panel__header { flex-direction: column; align-items: flex-start; }
+    .search { width: 100%; }
+}
