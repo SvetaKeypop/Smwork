@@ -16,7 +16,5 @@ sphinx_docs/_build/
 .vscode/
 *.log
 
-docs/User_Story_Лапин_Василенко.docx
-docs/gen_user_story.js
 docs/node_modules/
-docs/package*.json
+docs/package-lock.json
